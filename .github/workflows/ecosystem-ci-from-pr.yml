@@ -30,6 +30,7 @@ on:
         options:
           - "-"
           - rslib
+          - rsbuild
       suiteRefType:
         description: "type of suite ref to use"
         required: true
@@ -71,6 +72,8 @@ jobs:
       matrix:
         include:
           - suite: rslib
+            os: ubuntu-latest
+          - suite: rsbuild
             os: ubuntu-latest
       fail-fast: false
     runs-on: ${{ matrix.os }}

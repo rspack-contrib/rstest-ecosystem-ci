@@ -38,6 +38,7 @@ on:
           # - plugins
           # - rspress
           - rslib
+          - rsbuild
           # - examples
       suiteRefType:
         description: "type of suite ref to use"
@@ -84,6 +85,8 @@ jobs:
           # - suite: rspress
           #   os: ubuntu-latest
           - suite: rslib
+            os: ubuntu-latest
+          - suite: rsbuild
             os: ubuntu-latest
           # - suite: examples
           #   os: ubuntu-latest
