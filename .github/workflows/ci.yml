@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        include:
+          - suite: rslib
+            os: ubuntu-latest
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.suite }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/build-rstest
+      - name: Install
+        run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Expose GitHub Runtime
+        uses: crazy-max/ghaction-github-runtime@v3
+      - run: >-
+          pnpm tsx ecosystem-ci.ts
+          run-suites
+          ${{ matrix.suite }}
