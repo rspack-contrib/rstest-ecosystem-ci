@@ -22,7 +22,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/build-rstest
       - name: Install
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile --prefer-offline
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v3
       - run: >-
